@@ -102,17 +102,21 @@ if st.button("Predict"):
     
     # SHAP 解释
     st.subheader("SHAP Force Plot Explanation")
-    explainer_shap = shap.TreeExplainer(model)
-    shap_values = explainer_shap.shap_values(pd.DataFrame([feature_values], columns=feature_names))
+    # explainer_shap = shap.TreeExplainer(model)
+    # shap_values = explainer_shap.shap_values(pd.DataFrame([feature_values], columns=feature_names))
 
     # 绘图
-    shap.initjs()  # 初始化 SHAP
-    print('----------------------------------------')
-    print(explainer_shap)
-    print('----------------------------------------')
-    print(explainer_shap.type())
-    shap.force_plot(explainer_shap.expected_value[predicted_class], shap_values[predicted_class], pd.DataFrame([feature_values], columns=feature_names))
-    # shap.force_plot(explainer_shap.expected_value[0], shap_values[:,:,0], pd.DataFrame([feature_values], columns=feature_names), matplotlib=True)
+    # shap.initjs()  # 初始化 SHAP
+    # print('----------------------------------------')
+    # print(explainer_shap)
+    # print('----------------------------------------')
+    # print(explainer_shap.type())
+    # shap.force_plot(explainer_shap.expected_value[predicted_class], shap_values[predicted_class], pd.DataFrame([feature_values], columns=feature_names))
+    # # shap.force_plot(explainer_shap.expected_value[0], shap_values[:,:,0], pd.DataFrame([feature_values], columns=feature_names), matplotlib=True)
+    explainer = shap.TreeExplainer(model)
+    shap_values = explainer.shap_values(pd.DataFrame([feature_values], columns=feature_names))
+    shap.force_plot(explainer.expected_value, shap_values[0], pd.DataFrame([feature_values], columns=feature_names), matplotlib=True)
+    plt.savefig("shap_force_plot.png", bbox_inches='tight', dpi=1200)
     # LIME 解释
     st.subheader("LIME Explanation")
     lime_explainer = LimeTabularExplainer(X_test.values, feature_names=feature_names, class_names=[' grade1', 'grade2-3'], mode='classification')
