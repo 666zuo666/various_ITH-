@@ -130,7 +130,7 @@ if st.button("Predict"):
     plt.figure(figsize=(10, 8))
     #shap.force_plot(explainer.expected_value, shap_values_numpy[sample_index], X_test.iloc[sample_index], matplotlib=True,show=True)
     #shap.force_plot(explainer.expected_value, shap_values_numpy[sample_index], X_test.iloc[sample_index], matplotlib=True)
-    shap.force_plot(explainer.expected_value, shap_values_numpy[sample_index], pd.DataFrame([feature_values], columns=feature_names), matplotlib=True)
+    shap.force_plot(explainer.expected_value[sample_index], shap_values_numpy[sample_index], pd.DataFrame([feature_values], columns=feature_names), matplotlib=True)
     plt.savefig(f"SHAP_force_plot_sample_{sample_index}.pdf", format='pdf', bbox_inches='tight')
     plt.show()
 
