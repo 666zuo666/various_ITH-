@@ -6,6 +6,7 @@ import shap
 import matplotlib.pyplot as plt
 from lime.lime_tabular import LimeTabularExplainer
 import xgboost
+from lightgbm import LGBMClassifier
 # 加载模型和数据
 model=joblib.load('LGBMClassifier.pkl')
 X_test = pd.read_csv('X_test.csv')
