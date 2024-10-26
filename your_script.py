@@ -107,17 +107,30 @@ if st.button("Predict"):
 
     # 绘图
     # shap.initjs()  # 初始化 SHAP
-    # print('----------------------------------------')
-    # print(explainer_shap)
-    # print('----------------------------------------')
-    # print(explainer_shap.type())
-    # shap.force_plot(explainer_shap.expected_value[predicted_class], shap_values[predicted_class], pd.DataFrame([feature_values], columns=feature_names))
-    # # shap.force_plot(explainer_shap.expected_value[0], shap_values[:,:,0], pd.DataFrame([feature_values], columns=feature_names), matplotlib=True)
+    # # print('----------------------------------------')
+    # # print(explainer_shap)
+    # # print('----------------------------------------')
+    # # print(explainer_shap.type())
+    # # shap.force_plot(explainer_shap.expected_value[predicted_class], shap_values[predicted_class], pd.DataFrame([feature_values], columns=feature_names))
+    # # # shap.force_plot(explainer_shap.expected_value[0], shap_values[:,:,0], pd.DataFrame([feature_values], columns=feature_names), matplotlib=True)
+    # explainer = shap.TreeExplainer(model)
+    # shap_values = explainer.shap_values(pd.DataFrame([feature_values], columns=feature_names))
+    # #shap.force_plot(explainer.expected_value, shap_values[0], pd.DataFrame([feature_values], columns=feature_names), matplotlib=True)
+    # shap.force_plot(explainer.expected_value[0], shap_values[0], pd.DataFrame([feature_values], columns=feature_names), matplotlib=True)
+    # plt.savefig("shap_force_plot.png", bbox_inches='tight', dpi=1200)
+
+    import shap
+
+    # # 计算 SHAP 值
     explainer = shap.TreeExplainer(model)
-    shap_values = explainer.shap_values(pd.DataFrame([feature_values], columns=feature_names))
-    #shap.force_plot(explainer.expected_value, shap_values[0], pd.DataFrame([feature_values], columns=feature_names), matplotlib=True)
-    shap.force_plot(explainer.expected_value[0], shap_values[0], pd.DataFrame([feature_values], columns=feature_names), matplotlib=True)
-    plt.savefig("shap_force_plot.png", bbox_inches='tight', dpi=1200)
+    shap_values_numpy = explainer.shap_values(X_test)
+    # 绘制单个样本的 SHAP 力图
+    sample_index = 0  # 选择要绘制的样本索引
+    plt.figure(figsize=(10, 8))
+    shap.force_plot(explainer.expected_value, shap_values_numpy[sample_index], X_test.iloc[sample_index], matplotlib=True)
+    plt.savefig(f"SHAP_force_plot_sample_{sample_index}.pdf", format='pdf', bbox_inches='tight')
+    plt.show()
+
     # LIME 解释
     st.subheader("LIME Explanation")
     lime_explainer = LimeTabularExplainer(X_test.values, feature_names=feature_names, class_names=[' grade1', 'grade2-3'], mode='classification')
