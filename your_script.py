@@ -95,7 +95,7 @@ if st.button("Predict"):
     # shap.force_plot(explainer_shap.expected_value[0], shap_values[:,:,0], pd.DataFrame([feature_values], columns=feature_names), matplotlib=True)
     # LIME 解释
     st.subheader("LIME Explanation")
-    lime_explainer = LimeTabularExplainer(X_test.values, feature_names=feature_names, class_names=['LPA', 'Others'], mode='classification')
+    lime_explainer = LimeTabularExplainer(X_test.values, feature_names=feature_names, class_names=[' grade1', 'grade2-3'], mode='classification')
     lime_exp = lime_explainer.explain_instance(features.flatten(), predict_fn=model.predict_proba)
     lime_html = lime_exp.as_html(show_table=False)
     st.components.v1.html(lime_html, height=800, scrolling=True)
