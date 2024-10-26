@@ -5,8 +5,29 @@ import pandas as pd
 import shap
 import matplotlib.pyplot as plt
 from lime.lime_tabular import LimeTabularExplainer
-import xgboost
+from sklearn.model_selection import train_test_split, GridSearchCV, cross_val_score
+from sklearn.metrics import confusion_matrix, accuracy_score, classification_report
+from sklearn.metrics import roc_auc_score, roc_curve, auc
+import matplotlib.pyplot as plt
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.svm import SVC
+from sklearn.naive_bayes import GaussianNB
+from sklearn import tree
+from sklearn.neural_network import MLPClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+#安装并加载xgboost包
+from xgboost import XGBClassifier
+#安装并加载lightgbm包，在LightGBM提出之前，最有名的GBDT工具就是gbdtoost了，
+#它是基于预排序方法的决策树算法。lightgbm是对gbdtoost的优化
 from lightgbm import LGBMClassifier
+#安装并加载catboost包。catboost也基于决策树。但是嵌入了自动将类别型特征处
+#理为数值型特征的创新算法。
+#Catboost采用排序提升的方法对抗训练集中的噪声点，从而避免梯度估计的偏
+from catboost import CatBoostClassifier
+from warnings import filterwarnings
 # 加载模型和数据
 model=joblib.load('LGBMClassifier.pkl')
 X_test = pd.read_csv('X_test.csv')
