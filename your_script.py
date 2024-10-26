@@ -26,7 +26,7 @@ from lightgbm import LGBMClassifier
 #安装并加载catboost包。catboost也基于决策树。但是嵌入了自动将类别型特征处
 #理为数值型特征的创新算法。
 #Catboost采用排序提升的方法对抗训练集中的噪声点，从而避免梯度估计的偏
-from catboost import CatBoostClassifier
+#from catboost import CatBoostClassifier
 from warnings import filterwarnings
 # 加载模型和数据
 model=joblib.load('LGBMClassifier.pkl')
