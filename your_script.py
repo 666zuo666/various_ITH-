@@ -71,7 +71,7 @@ Boundary = st.selectbox("Boundary:", options=[0, 1], format_func=lambda x: "Abse
 Vascular_convergence_sign = st.selectbox("Vascular convergence sign:", options=[0, 1], format_func=lambda x: "Absent" if x == 0 else "Present")
 Sex = st.selectbox("Sex:", options=[0, 1], format_func=lambda x: "Female" if x == 0 else "Male")
 # 特征名称
-Vascular_convergence_sign = st.selectbox("Vascular convergence sign:", options=[0, 1], format_func=lambda x: "Absent" if x == 0 else "Present")
+#Vascular_convergence_sign = st.selectbox("Vascular convergence sign:", options=[0, 1], format_func=lambda x: "Absent" if x == 0 else "Present")
 feature_names = ["ITH_2D", "ITH_3D","Size", "shape_Sphericity","glcm_Correlation","glcm_MCC", "glszm_ZonePercentage","glrlm_RunPercentage","ngtdm_Coarseness","Pleural_indentation", "Age", "Location", "Shape","Spiculation","Vacuole_sign","Lobulation","CT_density","Boundary","Vascular_convergence_sign","Sex"]
 
 # 处理输入并进行预测
