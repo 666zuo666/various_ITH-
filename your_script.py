@@ -88,15 +88,15 @@ if st.button("Predict"):
     probability = predicted_proba[predicted_class] * 100
     if predicted_class == 1:
         advice = (
-            f"Our model indicates a low probability being pathologically identified as grade1."
-            f"The model estimates the probability of grade1 as {probability:.1f}%."
-            "It's important to maintain a healthy lifestyle and keep having regular check-ups."
-        )
-    else:
-        advice = (
             f"Our model indicates a high probability  being pathologically identified as grade2-3."
             f"The model estimates the probability of grade2-3 as {probability:.1f}%."
             "Operative intervention is advised, specifically an anatomic lobectomy in conjunction with systematic lymph node dissection."
+        )
+    else:
+        advice = (
+            f"Our model indicates a low probability  being pathologically identified as grade1."
+            f"The model estimates the probability of grade1 as {probability:.1f}%."
+            "It's important to maintain a healthy lifestyle and keep having regular check-ups."
         )  # 根据预测结果生成建议
     st.write(advice)
     
