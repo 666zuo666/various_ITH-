@@ -128,7 +128,7 @@ if st.button("Predict"):
     sample_index = 0  # 选择要绘制的样本索引
     plt.figure(figsize=(10, 8))
     #shap.force_plot(explainer.expected_value, shap_values_numpy[sample_index], X_test.iloc[sample_index], matplotlib=True,show=True)
-    shap.force_plot(explainer.expected_value, shap_values_numpy, X_test.iloc[sample_index], matplotlib=True,show=True)
+    shap.force_plot(explainer.expected_value, shap_values_numpy[sample_index], X_test.iloc[sample_index], matplotlib=True)
     plt.savefig(f"SHAP_force_plot_sample_{sample_index}.pdf", format='pdf', bbox_inches='tight')
     plt.show()
 
