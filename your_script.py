@@ -123,7 +123,8 @@ if st.button("Predict"):
 
     # # 计算 SHAP 值
     explainer = shap.TreeExplainer(model)
-    shap_values_numpy = explainer.shap_values(X_test)
+    #shap_values_numpy = explainer.shap_values(X_test)
+    shap_values_numpy = explainer_shap.shap_values(pd.DataFrame([feature_values], columns=feature_names))
     # 绘制单个样本的 SHAP 力图
     sample_index = 0  # 选择要绘制的样本索引
     plt.figure(figsize=(10, 8))
