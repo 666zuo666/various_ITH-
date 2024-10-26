@@ -47,17 +47,35 @@ ngtdm_Coarseness = st.number_input("ngtdm_Coarseness:", min_value=0.0, max_value
 Size = st.number_input("Tumor size:", min_value=0.0, max_value=30.0, value=7.62, step=0.01)
 Pleural_indentation = st.selectbox("Pleural indentation:", options=[0, 1], format_func=lambda x: "Absent" if x == 0 else "Present")
 Age = st.number_input("Age:", min_value=21.0, max_value=100.0, value=64.0, step=1.0)
-Location = st.selectbox("Location:", options=[1, 2, 3, 4, 5], format_func=lambda x: "RUL" if x == 1 else ("RLL" if x == 2 else ("RML" if x == 3 else ("LUL" if x == 4 else "LLL"))))
+Location = st.selectbox(
+    "Location:",
+    options=[0, 1, 2, 3, 4],
+    format_func=lambda x: "RUL" if x == 1 else (
+        "RLL" if x == 2 else (
+            "RML" if x == 3 else (
+                "LUL" if x == 4 else "LLL"
+            )
+        )
+    )
+)
 Shape = st.selectbox("Shape:", options=[0, 1], format_func=lambda x: "Regular" if x == 1 else "Irregular")
 Spiculation = st.selectbox("Spiculation:", options=[0, 1], format_func=lambda x: "Absent" if x == 0 else "Present")
 Vacuole_sign = st.selectbox("Vacuole sign:", options=[0, 1], format_func=lambda x: "Absent" if x == 0 else "Present")
 Lobulation = st.selectbox("Lobulation:", options=[0, 1], format_func=lambda x: "Absent" if x == 0 else "Present")
-
+CT_density = st.selectbox(
+    "CT density:",
+    options=[0, 1, 2],
+    format_func=lambda x: "GGN" if x == 0 else ("SSN" if x == 1 else "SN")
+)
+Boundary = st.selectbox("Boundary:", options=[0, 1], format_func=lambda x: "Absent" if x == 0 else "Present")
+Vascular_convergence_sign = st.selectbox("Vascular convergence sign:", options=[0, 1], format_func=lambda x: "Absent" if x == 0 else "Present")
+Sex = st.selectbox("Sex:", options=[0, 1], format_func=lambda x: "Female" if x == 0 else "Male")
 # 特征名称
-feature_names = ["ITH_2D", "ITH_3D","Size", "shape_Sphericity","glcm_Correlation","glcm_MCC", "glszm_ZonePercentage","glrlm_RunPercentage","ngtdm_Coarseness","Pleural_indentation", "Age", "Location", "Shape","Spiculation","Vacuole_sign","Lobulation"]
+Vascular_convergence_sign = st.selectbox("Vascular convergence sign:", options=[0, 1], format_func=lambda x: "Absent" if x == 0 else "Present")
+feature_names = ["ITH_2D", "ITH_3D","Size", "shape_Sphericity","glcm_Correlation","glcm_MCC", "glszm_ZonePercentage","glrlm_RunPercentage","ngtdm_Coarseness","Pleural_indentation", "Age", "Location", "Shape","Spiculation","Vacuole_sign","Lobulation","CT_density","Boundary","Vascular_convergence_sign","Sex"]
 
 # 处理输入并进行预测
-feature_values = [ITH_2D, ITH_3D,Size, shape_Sphericity, glcm_Correlation ,glcm_MCC ,glszm_ZonePercentage,glrlm_RunPercentage,ngtdm_Coarseness,Pleural_indentation, Age, Location, Shape,Spiculation,Vacuole_sign,Lobulation]
+feature_values = [ITH_2D, ITH_3D,Size, shape_Sphericity, glcm_Correlation ,glcm_MCC ,glszm_ZonePercentage,glrlm_RunPercentage,ngtdm_Coarseness,Pleural_indentation, Age, Location, Shape,Spiculation,Vacuole_sign,Lobulation,CT_density,Boundary,Vascular_convergence_sign,Sex]
 features = np.array([feature_values])
 
 if st.button("Predict"):
